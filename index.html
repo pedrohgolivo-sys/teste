@@ -93,6 +93,11 @@
     #map { height: 60dvh; flex: none; }
     .header-stats { display: none; }
   }
+
+  .equipe-body {
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+  }
 </style>
 </head>
 <body>
@@ -190,7 +195,8 @@ const obras = [
     nome: "Barra Home Resort",
     cidade: "Itapoá - SC", estado: "SC",
     linha: "Prime",
-    cnpj: "40.432.712/0001-02", cno: "90.022.62731/73",
+    cnpj: "40.432.712/0001-02",
+    docs: "https://rottasconstrutora.sharepoint.com/:f:/r/sites/RottasFileServer/Documentos%20Compartilhados/ENG/Suprimentos/01.%20SUPRIMENTOS/03.%20DOCUMENTOS%20ROTTAS%20-%20CADASTROS/25.%20Rottas%2021%20-%20Barra%20Home%20Resort%20(Itapoa%201)?csf=1&web=1&e=kex2Cw", cno: "90.022.62731/73",
     razao: "RT21 EMPREENDIMENTOS IMOBILIARIOS SPE LTDA",
     endereco: "Av. Dom Henrique II, 2480 - Barra do Saí, Itapoá - SC",
     lat: -26.028034, lng: -48.608973,
@@ -220,7 +226,8 @@ const obras = [
     nome: "Barra Soul",
     cidade: "Itapoá - SC", estado: "SC",
     linha: "Prime",
-    cnpj: "45.110.381/0001-08", cno: "—",
+    cnpj: "45.110.381/0001-08",
+    docs: "https://rottasconstrutora.sharepoint.com/:f:/r/sites/RottasFileServer/Documentos%20Compartilhados/ENG/Suprimentos/01.%20SUPRIMENTOS/03.%20DOCUMENTOS%20ROTTAS%20-%20CADASTROS/33.%20Rottas%2043%20-%20Barra%20Soul?csf=1&web=1&e=Sb4vMG", cno: "—",
     razao: "ROTTAS 43 EMPREENDIMENTOS IMOBILIARIOS SPE LTDA",
     endereco: "R. 320 Duque de Caxias, Nº 581 - Barra do Saí, Itapoá - SC",
     lat: -26.026932, lng: -48.611529,
@@ -246,7 +253,8 @@ const obras = [
     nome: "Porto Bella Vista",
     cidade: "Ponta Grossa - PR", estado: "PR",
     linha: "Porto",
-    cnpj: "47.756.807/0001-12", cno: "90.021.94974/70",
+    cnpj: "47.756.807/0001-12",
+    docs: "https://rottasconstrutora.sharepoint.com/:f:/r/sites/RottasFileServer/Documentos%20Compartilhados/ENG/Suprimentos/01.%20SUPRIMENTOS/03.%20DOCUMENTOS%20ROTTAS%20-%20CADASTROS/17.%20Rottas%20-%20Campobello%20Gold?csf=1&web=1&e=QFoeqf", cno: "90.021.94974/70",
     razao: "ROTTAS CAMPOBELLO GOLD EMPREENDIMENTO IMOBILIARIO LTDA",
     endereco: "Colônia Dona Luiza Arno Wolf, S/N, Ponta Grossa - PR",
     lat: -25.141968, lng: -50.181395,
@@ -272,7 +280,8 @@ const obras = [
     nome: "Porto Garten",
     cidade: "Joinville - SC", estado: "SC",
     linha: "Porto",
-    cnpj: "35.797.142/0001-06", cno: "90.017.58879/78",
+    cnpj: "35.797.142/0001-06",
+    docs: "https://rottasconstrutora.sharepoint.com/:f:/r/sites/RottasFileServer/Documentos%20Compartilhados/ENG/Suprimentos/01.%20SUPRIMENTOS/03.%20DOCUMENTOS%20ROTTAS%20-%20CADASTROS/24.%20Rottas%2001%20-%20Porto%20Garten?csf=1&web=1&e=Exy8zz", cno: "90.017.58879/78",
     razao: "ROTTAS 1 CONSTRUTORA E INCORPORADORA SPE LTDA",
     endereco: "R. Hilda Rech, 348 - Vila Nova, Joinville - SC",
     lat: -26.278987, lng: -48.901199,
@@ -303,7 +312,8 @@ const obras = [
     nome: "Vega Costa e Silva",
     cidade: "Joinville - SC", estado: "SC",
     linha: "Vega",
-    cnpj: "40.099.077/0001-85", cno: "90.023.63756/71",
+    cnpj: "40.099.077/0001-85",
+    docs: "https://rottasconstrutora.sharepoint.com/:f:/r/sites/RottasFileServer/Documentos%20Compartilhados/ENG/Suprimentos/01.%20SUPRIMENTOS/03.%20DOCUMENTOS%20ROTTAS%20-%20CADASTROS/28.%20Rottas%2024%20-%20Vega%20Costa%20e%20Silva?csf=1&web=1&e=ZYsVXy", cno: "90.023.63756/71",
     razao: "RT24 EMPREENDIMENTOS IMOBILIARIOS SPE S.A",
     endereco: "R. Pavão, 1401 - Costa e Silva, Joinville - SC",
     lat: -26.278920, lng: -48.880770,
@@ -334,7 +344,8 @@ const obras = [
     nome: "MEO Anita",
     cidade: "Joinville - SC", estado: "SC",
     linha: "MEO",
-    cnpj: "39.383.357/0001-31", cno: "90.015.17458/70",
+    cnpj: "39.383.357/0001-31",
+    docs: "https://rottasconstrutora.sharepoint.com/:f:/r/sites/RottasFileServer/Documentos%20Compartilhados/ENG/Suprimentos/01.%20SUPRIMENTOS/03.%20DOCUMENTOS%20ROTTAS%20-%20CADASTROS/21.%20Rottas%2019%20-%20Meo%20Anita?csf=1&web=1&e=feHg2W", cno: "90.015.17458/70",
     razao: "RT19 EMPREENDIMENTOS IMOBILIARIOS SPE LTDA",
     endereco: "Rua Barbacena 75 - Anita Garibaldi, Joinville - SC",
     lat: -26.325688, lng: -48.861859,
@@ -364,7 +375,8 @@ const obras = [
     nome: "Vega Jaraguá",
     cidade: "Jaraguá do Sul - SC", estado: "SC",
     linha: "Vega",
-    cnpj: "45.107.162/0001-61", cno: "90.022.56302/79",
+    cnpj: "45.107.162/0001-61",
+    docs: "https://rottasconstrutora.sharepoint.com/:f:/r/sites/RottasFileServer/Documentos%20Compartilhados/ENG/Suprimentos/01.%20SUPRIMENTOS/03.%20DOCUMENTOS%20ROTTAS%20-%20CADASTROS/26.%20Rottas%2037%20-%20Vega%20Jaragua?csf=1&web=1&e=OUp78b", cno: "90.022.56302/79",
     razao: "ROTTAS 37 EMPREENDIMENTOS IMOBILIARIOS SPE LTDA",
     endereco: "R. Vitória Chiodini Spézia, 200 - Jaraguá Esquerdo, Jaraguá do Sul - SC",
     lat: -26.496766, lng: -49.096556,
@@ -395,7 +407,8 @@ const obras = [
     nome: "Itajuba",
     cidade: "Barra Velha - SC", estado: "SC",
     linha: "Prime",
-    cnpj: "45.111.091/0001-70", cno: "—",
+    cnpj: "45.111.091/0001-70",
+    docs: "https://rottasconstrutora.sharepoint.com/:f:/r/sites/RottasFileServer/Documentos%20Compartilhados/ENG/Suprimentos/01.%20SUPRIMENTOS/03.%20DOCUMENTOS%20ROTTAS%20-%20CADASTROS/32.%20Rottas%2044%20-%20Itajuba?csf=1&web=1&e=H8BK6H", cno: "—",
     razao: "ROTTAS 44 EMPREENDIMENTOS IMOBILIARIOS SPE LTDA",
     endereco: "R. Areia Branca - Itajuba, Barra Velha - SC",
     lat: -26.718909, lng: -48.693002,
@@ -423,7 +436,8 @@ const obras = [
     nome: "Amplopark",
     cidade: "Ponta Grossa - PR", estado: "PR",
     linha: "Porto",
-    cnpj: "40.112.317/0001-34", cno: "90.026.06387/73",
+    cnpj: "40.112.317/0001-34",
+    docs: "https://rottasconstrutora.sharepoint.com/:f:/r/sites/RottasFileServer/Documentos%20Compartilhados/ENG/Suprimentos/01.%20SUPRIMENTOS/03.%20DOCUMENTOS%20ROTTAS%20-%20CADASTROS/31.%20Rottas%2023%20-%20Amplo%20Park%20RODERJAN?csf=1&web=1&e=vvLLdp", cno: "90.026.06387/73",
     razao: "ROTTAS 23 EMPREENDIMENTOS IMOBILIARIOS RODERJAN S.A",
     endereco: "Rua Recanto dos Pássaros, 601 - Chapada, Ponta Grossa - PR",
     lat: -25.056896, lng: -50.216199,
@@ -456,7 +470,8 @@ const obras = [
     nome: "Vega Neoville",
     cidade: "Curitiba - PR", estado: "PR",
     linha: "Vega",
-    cnpj: "43.221.875/0001-26", cno: "90.020.66871/79",
+    cnpj: "43.221.875/0001-26",
+    docs: "https://rottasconstrutora.sharepoint.com/:f:/r/sites/RottasFileServer/Documentos%20Compartilhados/ENG/Suprimentos/01.%20SUPRIMENTOS/03.%20DOCUMENTOS%20ROTTAS%20-%20CADASTROS/27.%20Rottas%2026%20-%20Vega%20Neoville%202?csf=1&web=1&e=6DOxq4", cno: "90.020.66871/79",
     razao: "ROTTAS 26 EMPREENDIMENTOS IMOBILIARIOS SPE LTDA",
     endereco: "Rua Agostinho Brusamolin, 141 - CIC, Curitiba - PR",
     lat: -25.501888, lng: -49.309838,
@@ -487,7 +502,8 @@ const obras = [
     nome: "Porto Aurora",
     cidade: "Londrina - PR", estado: "PR",
     linha: "Porto",
-    cnpj: "55.522.310/0001-68", cno: "—",
+    cnpj: "55.522.310/0001-68",
+    docs: "https://rottasconstrutora.sharepoint.com/:f:/r/sites/RottasFileServer/Documentos%20Compartilhados/ENG/Suprimentos/01.%20SUPRIMENTOS/03.%20DOCUMENTOS%20ROTTAS%20-%20CADASTROS/30.%20Rottas%2047%20-%20Porto%20Aurora?csf=1&web=1&e=MortJO", cno: "—",
     razao: "RT 47 EMPREENDIMENTOS IMOBILIARIOS SPE S.A.",
     endereco: "Rua Bartholomeu Lopes, 700 - Saltinho, Londrina - PR",
     lat: -23.379288, lng: -51.139766,
@@ -574,7 +590,8 @@ obras.forEach(o => {
 
   const equipHTML = o.equipe && o.equipe.length > 0
     ? '<div style="margin-top:6px;padding-top:4px">' +
-      '<div style="margin-top:8px;padding:6px 10px;background:#0f1923;border-radius:5px;display:flex;align-items:center;gap:6px"><span class="material-symbols-outlined" style="font-size:14px;color:#e05c2a">group</span><span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#fff">Equipe</span></div>' +
+      '<div onclick="toggleEquipe(this)" style="margin-top:8px;padding:6px 10px;background:#0f1923;border-radius:5px;display:flex;align-items:center;justify-content:space-between;gap:6px;cursor:pointer;user-select:none"><div style="display:flex;align-items:center;gap:6px"><span class="material-symbols-outlined" style="font-size:14px;color:#e05c2a">group</span><span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#fff">Equipe</span></div><span class="equipe-chevron" style="font-size:13px;color:#8a9aaa;transition:transform .25s">▼</span></div>' +
+      '<div class="equipe-body" style="display:none">' +
       o.equipe.map(function(m) {
         var waBtn = (m.tel)
           ? '<a href="https://wa.me/' + m.tel + '" target="_blank" title="WhatsApp" style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:#25d366;border-radius:50%;text-decoration:none;margin-left:0;flex-shrink:0"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.118.55 4.1 1.508 5.82L0 24l6.335-1.482A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.368l-.36-.214-3.732.872.872-3.682-.235-.374A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182c5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg></a>'
@@ -603,11 +620,16 @@ obras.forEach(o => {
       (function() {
         var txt = 'Obra: ' + o.nome + '\nEndereço: ' + o.endereco + '\nCNPJ: ' + (o.cnpj || '—') + '\nCNO: ' + (o.cno || '—');
         return '<button class="copy-btn" data-copy="' + txt.replace(/"/g, '&quot;') + '" onclick="copiarDados(this)" '
-          + 'style="width:100%;padding:7px 0;margin-bottom:8px;background:#f07540;border:1px solid #e05c2a;border-radius:6px;'
-          + 'font-family:Inter,sans-serif;font-size:12px;font-weight:600;color:#ffffff;cursor:pointer;'
+          + 'style="width:100%;padding:7px 0;margin-bottom:8px;background:#f5f7fa;border:1px solid #dde3ea;border-radius:6px;'
+          + 'font-family:Inter,sans-serif;font-size:12px;font-weight:600;color:#1a4f7a;cursor:pointer;'
           + 'display:flex;align-items:center;justify-content:center;gap:5px">'
           + '<span class="material-symbols-outlined" style="font-size:15px">content_copy</span>Copiar endereço, CNPJ e CNO</button>';
       })() +
+      (o.docs ? '<a href="' + o.docs + '" target="_blank" '
+        + 'style="display:flex;align-items:center;justify-content:center;gap:5px;width:100%;padding:7px 0;margin-bottom:8px;'
+        + 'background:#f5f7fa;border:1px solid #dde3ea;border-radius:6px;'
+        + 'font-family:Inter,sans-serif;font-size:12px;font-weight:600;color:#1a4f7a;text-decoration:none;cursor:pointer">'
+        + '<span class="material-symbols-outlined" style="font-size:15px">folder_open</span>Documentos de Cadastro</a>' : '') +
       (o.pasta ? '<a href="' + o.pasta + '" target="_blank" '
         + 'style="display:flex;align-items:center;justify-content:center;gap:5px;width:100%;padding:7px 0;margin-bottom:8px;'
         + 'background:#eef4ff;border:1px solid #c5d9f0;border-radius:6px;'
@@ -641,6 +663,33 @@ function setActive(id) {
 }
 
 
+
+
+function toggleEquipe(header) {
+  var body = header.nextElementSibling;
+  var chevron = header.querySelector('.equipe-chevron');
+  var isOpen = body.style.maxHeight && body.style.maxHeight !== '0px';
+  if (isOpen) {
+    body.style.maxHeight = body.scrollHeight + 'px';
+    requestAnimationFrame(function() {
+      body.style.maxHeight = '0px';
+      body.style.opacity = '0';
+    });
+    setTimeout(function() { body.style.display = 'none'; }, 300);
+    chevron.style.transform = '';
+  } else {
+    body.style.display = 'block';
+    body.style.maxHeight = '0px';
+    body.style.opacity = '0';
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        body.style.maxHeight = body.scrollHeight + 'px';
+        body.style.opacity = '1';
+      });
+    });
+    chevron.style.transform = 'rotate(180deg)';
+  }
+}
 
 function copiarDados(btn) {
   var texto = btn.getAttribute('data-copy');
