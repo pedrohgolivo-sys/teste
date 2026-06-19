@@ -853,29 +853,41 @@ obras.forEach(o => {
                '<div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.55);color:#fff;font-size:10px;padding:3px 6px;border-radius:0 0 6px 6px;text-align:center">' + foto.data + '</div>' +
                '</div>';
       }).join('') +
-      '</div>'
+      '</div></div>'
     : '';
 
-  const equipHTML = o.equipe && o.equipe.length > 0
-    ? '<div style="margin-top:6px;padding-top:4px">' +
-      '<div onclick="toggleEquipe(this)" style="margin-top:8px;padding:6px 10px;background:#0f1923;border-radius:5px;display:flex;align-items:center;justify-content:space-between;gap:6px;cursor:pointer;user-select:none"><div style="display:flex;align-items:center;gap:6px"><span class="material-symbols-outlined" style="font-size:14px;color:#e05c2a">group</span><span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#fff">Equipe</span></div><span class="equipe-chevron" style="font-size:13px;color:#8a9aaa;transition:transform .25s">▼</span></div>' +
+  const obraEquipe = o.equipe ? o.equipe.filter(function(m) { return ['Gerente','Coordenador','Eng. Residente','Analista de Eng.','Adm de Obra','Almoxarife'].indexOf(m.cargo) !== -1; }) : [];
+  const apoioEquipe = o.equipe ? o.equipe.filter(function(m) { return ['Analista PCP','Analista Proj.','Analista Arq.','Fiscal'].indexOf(m.cargo) !== -1; }) : [];
+
+  function renderEquipeSection(cargos, titulo, icone, cor) {
+    if (!cargos.length) return '';
+    return '<div style="margin-top:6px;padding-top:4px">' +
+      '<div style="margin-top:8px;background:#0f1923;border-radius:5px;display:flex;align-items:center;overflow:hidden">' +
+        '<div onclick="toggleEquipe(this.parentElement)" style="flex:1;padding:6px 10px;display:flex;align-items:center;justify-content:space-between;gap:6px;cursor:pointer;user-select:none">' +
+          '<div style="display:flex;align-items:center;gap:6px">' +
+            '<span class="material-symbols-outlined" style="font-size:14px;color:' + cor + '">' + icone + '</span>' +
+            '<span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#fff">' + titulo + '</span>' +
+          '</div>' +
+          '<span class="equipe-chevron" style="font-size:13px;color:#8a9aaa;transition:transform .25s">▼</span>' +
+        '</div>' +
+        '<div onclick="copiarEquipe(this)" data-obra-id="' + o.id + '" title="Copiar contatos" style="padding:6px 10px;cursor:pointer;border-left:1px solid rgba(255,255,255,.15);display:flex;align-items:center;gap:4px">' +
+          '<span class="material-symbols-outlined" style="font-size:14px;color:#8a9aaa">content_copy</span>' +
+          '<span style="font-size:10px;color:#8a9aaa;font-weight:600">Copiar</span>' +
+        '</div>' +
+      '</div>' +
       '<div class="equipe-body" style="display:none">' +
-      o.equipe.map(function(m) {
-        var waBtn = (m.tel)
-          ? '<a href="https://wa.me/' + m.tel + '" target="_blank" title="WhatsApp" style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:#25d366;border-radius:50%;text-decoration:none;margin-left:0;flex-shrink:0"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.118.55 4.1 1.508 5.82L0 24l6.335-1.482A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.368l-.36-.214-3.732.872.872-3.682-.235-.374A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182c5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg></a>'
-          : '';
-        var teamsBtn = (m.teams)
-          ? '<a href="' + m.teams + '" target="_blank" title="Microsoft Teams" style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:#6264a7;border-radius:50%;text-decoration:none;margin-left:0;flex-shrink:0"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M19.5 5.5a2 2 0 100-4 2 2 0 000 4zm1.5 1h-3a1 1 0 00-1 1v6a1 1 0 001 1h3a1 1 0 001-1v-6a1 1 0 00-1-1zm-8-3a2.5 2.5 0 100-5 2.5 2.5 0 000 5zm3 2H9a1.5 1.5 0 00-1.5 1.5v7A1.5 1.5 0 009 15.5h1v4a1 1 0 002 0v-4h1a1.5 1.5 0 001.5-1.5v-7A1.5 1.5 0 0013 5.5z"/></svg></a>'
-          : '';
-        var nomeHTML = m.nome
-          ? '<span style="display:flex;align-items:center;gap:8px;justify-content:flex-end;flex:1;padding-left:16px">' 
-            + '<span style="font-weight:600;color:#0f1923;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + m.nome + '</span>'
-            + waBtn + teamsBtn
-            + '</span>'
-          : '<span style="color:#c0c8d0;font-style:italic">—</span>';
+      cargos.map(function(m) {
+        var waBtn = (m.tel) ? '<a href="https://wa.me/' + m.tel + '" target="_blank" title="WhatsApp" style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:#25d366;border-radius:50%;text-decoration:none;margin-left:3px;flex-shrink:0"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.118.55 4.1 1.508 5.82L0 24l6.335-1.482A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.368l-.36-.214-3.732.872.872-3.682-.235-.374A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182c5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg></a>' : '';
+        var teamsBtn = (m.teams) ? '<a href="' + m.teams + '" target="_blank" title="Microsoft Teams" style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:#6264a7;border-radius:50%;text-decoration:none;margin-left:4px;flex-shrink:0"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M19.5 5.5a2 2 0 100-4 2 2 0 000 4zm1.5 1h-3a1 1 0 00-1 1v6a1 1 0 001 1h3a1 1 0 001-1v-6a1 1 0 00-1-1zm-8-3a2.5 2.5 0 100-5 2.5 2.5 0 000 5zm3 2H9a1.5 1.5 0 00-1.5 1.5v7A1.5 1.5 0 009 15.5h1v4a1 1 0 002 0v-4h1a1.5 1.5 0 001.5-1.5v-7A1.5 1.5 0 0013 5.5z"/></svg></a>' : '';
+        var nomeHTML = m.nome ? '<span style="display:flex;align-items:center;gap:0;justify-content:flex-end;flex:1;padding-left:16px"><span style="font-weight:600;color:#0f1923;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + m.nome + '</span>' + waBtn + teamsBtn + '</span>' : '<span style="color:#c0c8d0;font-style:italic">—</span>';
         return '<div class="popup-row" style="display:flex;justify-content:space-between;align-items:center"><strong style="flex-shrink:0;max-width:45%">' + m.cargo + '</strong>' + nomeHTML + '</div>';
       }).join('') +
-      '</div></div>'
+      '</div></div>';
+  }
+
+  const equipHTML = (obraEquipe.length > 0 || apoioEquipe.length > 0)
+    ? renderEquipeSection(obraEquipe, 'Equipe de Obra', 'construction', '#e05c2a') +
+      renderEquipeSection(apoioEquipe, 'Equipe de Apoio', 'support_agent', '#6264a7')
     : '';
 
   const popupHTML =
@@ -1006,8 +1018,15 @@ function toggleChangelog() {
   arrow.style.transform = isOpen ? '' : 'rotate(180deg)';
 }
 
+
+
 function toggleEquipe(header) {
-  var body = header.nextElementSibling;
+  // header is now the inner clickable div, body is parent's next sibling
+  var container = header.parentElement || header;
+  var body = container.nextElementSibling;
+  if (!body || !body.classList.contains('equipe-body')) {
+    body = header.nextElementSibling;
+  }
   var chevron = header.querySelector('.equipe-chevron');
   var isOpen = body.style.maxHeight && body.style.maxHeight !== '0px';
   if (isOpen) {
@@ -1030,6 +1049,49 @@ function toggleEquipe(header) {
     });
     chevron.style.transform = 'rotate(180deg)';
   }
+}
+
+
+function copiarEquipe(btn) {
+  var obraId = btn.getAttribute('data-obra-id');
+  var obra = obras.find(function(o) { return String(o.id) === String(obraId); });
+  if (!obra) return;
+  var equipe = obra.equipe || [];
+
+  // Determine which section this button belongs to (Obra or Apoio)
+  var header = btn.closest ? btn.closest('[style*="background:#0f1923"]') : btn.parentElement;
+  var titulo = header ? header.querySelector('span[style*="color:#fff"]') : null;
+  var isApoio = titulo && titulo.textContent.indexOf('Apoio') !== -1;
+
+  var cargosAlvo;
+  if (isApoio) {
+    cargosAlvo = ['Analista PCP', 'Analista Proj.', 'Analista Arq.', 'Fiscal'];
+  } else {
+    cargosAlvo = ['Coordenador', 'Eng. Residente', 'Analista de Eng.', 'Adm de Obra', 'Almoxarife'];
+  }
+
+  var linhas = [];
+  equipe.forEach(function(m) {
+    if (cargosAlvo.indexOf(m.cargo) !== -1 && m.nome && m.nome !== '—' && m.nome !== '') {
+      var email = '';
+      if (m.teams) {
+        var match = m.teams.match(/users=([^&]+)/);
+        if (match) email = decodeURIComponent(match[1]);
+      }
+      if (email) linhas.push(m.cargo + ': ' + m.nome + ' <' + email + '>');
+    }
+  });
+
+  if (linhas.length === 0) {
+    linhas.push('Nenhum contato com e-mail cadastrado para estes cargos.');
+  }
+
+  var texto = linhas.join('\n');
+  navigator.clipboard.writeText(texto).then(function() {
+    var orig = btn.innerHTML;
+    btn.innerHTML = '<span class="material-symbols-outlined" style="font-size:14px;color:#25d366">check_circle</span><span style="font-size:10px;color:#25d366;font-weight:600">Copiado</span>';
+    setTimeout(function() { btn.innerHTML = orig; }, 2000);
+  });
 }
 
 function copiarDados(btn) {
