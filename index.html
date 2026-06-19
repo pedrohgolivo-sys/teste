@@ -98,6 +98,60 @@
     overflow: hidden;
     transition: max-height 0.3s ease, opacity 0.3s ease;
   }
+
+  /* CHANGELOG */
+  #changelog {
+    position: absolute;
+    bottom: 28px;
+    right: 10px;
+    z-index: 500;
+    width: 260px;
+    font-family: 'Inter', sans-serif;
+  }
+  #changelog-toggle {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+    width: 100%;
+    justify-content: space-between;
+  }
+  #changelog-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  #changelog-panel {
+    display: none;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.12);
+    margin-bottom: 6px;
+    overflow: hidden;
+  }
+  #changelog-panel.open { display: block; }
+  .changelog-head {
+    background: var(--ink);
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .changelog-head span { font-size: 12px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: .8px; }
+  .changelog-item {
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+  }
+  .changelog-item:last-child { border-bottom: none; }
+  .changelog-date { color: var(--accent); font-weight: 600; margin-bottom: 2px; }
+  .changelog-desc { color: var(--ink); line-height: 1.4; }
+
 </style>
 </head>
 <body>
@@ -753,6 +807,15 @@ function setActive(id) {
 
 
 
+
+function toggleChangelog() {
+  var panel = document.getElementById('changelog-panel');
+  var arrow = document.getElementById('changelog-arrow');
+  var isOpen = panel.classList.contains('open');
+  panel.classList.toggle('open');
+  arrow.style.transform = isOpen ? '' : 'rotate(180deg)';
+}
+
 function toggleEquipe(header) {
   var body = header.nextElementSibling;
   var chevron = header.querySelector('.equipe-chevron');
@@ -966,5 +1029,42 @@ document.addEventListener('keydown', e => {
 }, true);
 
 </script>
+
+<div id="changelog">
+  <div id="changelog-panel">
+    <div class="changelog-head">
+      <span class="material-symbols-outlined" style="font-size:14px;color:#e05c2a">history</span>
+      <span>Log de Atualizações</span>
+    </div>
+    <div class="changelog-item">
+      <div class="changelog-date">18/06/2026</div>
+      <div class="changelog-desc">Dados atualizados conforme R03 — Analista PCP preenchido, composição Barra Home corrigida (2x20+1x18), UH Total 4.158</div>
+    </div>
+    <div class="changelog-item">
+      <div class="changelog-date">18/06/2026</div>
+      <div class="changelog-desc">Adicionado filtro de Prazo de Entrega com dropdown e contador de obras na sidebar</div>
+    </div>
+    <div class="changelog-item">
+      <div class="changelog-date">18/06/2026</div>
+      <div class="changelog-desc">Equipe completa atualizada para todas as obras com novos cargos: Analista PCP, Analista Proj., Analista Arq. e Fiscal</div>
+    </div>
+    <div class="changelog-item">
+      <div class="changelog-date">17/06/2026</div>
+      <div class="changelog-desc">Links Teams adicionados para toda a equipe. Pasta de Documentos de Cadastro (SharePoint) em todas as obras</div>
+    </div>
+    <div class="changelog-item">
+      <div class="changelog-date">13/06/2026</div>
+      <div class="changelog-desc">Fotos adicionadas: MEO Anita, Porto Aurora, Vega Costa e Silva, Vega Jaraguá, Vega Neoville, Porto Garten</div>
+    </div>
+  </div>
+  <button id="changelog-toggle" onclick="toggleChangelog()">
+    <div style="display:flex;align-items:center;gap:6px">
+      <span class="material-symbols-outlined" style="font-size:14px">history</span>
+      Atualizações
+    </div>
+    <span id="changelog-arrow" style="font-size:12px;transition:transform .2s">▲</span>
+  </button>
+</div>
+
 </body>
 </html>
