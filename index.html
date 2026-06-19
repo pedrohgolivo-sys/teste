@@ -89,20 +89,22 @@
 
   @media (max-width: 700px) {
     /* Layout */
-    .layout { flex-direction: column; }
-    #map { flex: 1; order: 2; min-height: 0; }
-    .sidebar { order: 1; }
+    .layout { flex-direction: row; }
+    #map { flex: 1; min-width: 0; }
     .header-stats { display: none; }
 
     /* Sidebar compacta */
     .sidebar {
-      width: 100%;
-      height: auto;
-      border-right: none;
-      border-bottom: 1px solid var(--border);
-      overflow-y: visible;
+      width: 52px;
+      min-width: 52px;
+      height: 100%;
+      border-right: 1px solid var(--border);
+      border-bottom: none;
+      overflow: visible;
+      z-index: 500;
     }
     .obra-list { display: none !important; }
+    .sidebar-header { padding: 8px 6px; }
     .sidebar-header {
       padding: 8px 12px 6px;
     }
@@ -282,7 +284,7 @@
           <div id="uh-counter" style="font-size:11px;color:#5a6674;background:#f0f3f6;border-radius:5px;padding:3px 8px;font-weight:600"></div>
         </div>
       </div>
-      <button id="mobile-filter-toggle" onclick="toggleMobileFilters()" style="display:none;width:100%;margin-bottom:8px;padding:7px 12px;background:#f5f7fa;border:1px solid #dde3ea;border-radius:6px;font-family:Inter,sans-serif;font-size:12px;font-weight:600;color:#5a6674;cursor:pointer;align-items:center;justify-content:space-between"><div style="display:flex;align-items:center;gap:6px"><span class="material-symbols-outlined" style="font-size:15px">tune</span>Filtros</div><span id="mobile-filter-arrow" style="font-size:12px;transition:transform .2s">▼</span></button>
+      <button id="mobile-filter-toggle" onclick="toggleMobileFilters()" style="display:none;width:100%;padding:10px 6px;background:transparent;border:none;cursor:pointer;flex-direction:column;align-items:center;gap:4px;color:#5a6674"><span class="material-symbols-outlined" style="font-size:20px">tune</span><span style="font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.5px">Filtros</span></button>
       <div id="filters-body" style="display:flex;flex-direction:column;gap:8px">
         <div>
           <div style="font-size:10px;color:#8a9aaa;font-weight:600;text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Estado</div>
