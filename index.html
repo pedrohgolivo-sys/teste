@@ -90,18 +90,19 @@
   @media (max-width: 700px) {
     /* Layout */
     .layout { flex-direction: column; }
-    #map { height: 58dvh; flex: none; order: 2; }
+    #map { flex: 1; order: 2; min-height: 0; }
     .sidebar { order: 1; }
     .header-stats { display: none; }
 
     /* Sidebar compacta */
     .sidebar {
       width: 100%;
-      height: 42dvh;
+      height: auto;
       border-right: none;
       border-bottom: 1px solid var(--border);
-      overflow-y: auto;
+      overflow-y: visible;
     }
+    .obra-list { display: none !important; }
     .sidebar-header {
       padding: 8px 12px 6px;
     }
@@ -111,6 +112,7 @@
 
     /* Show filter toggle button on mobile */
     #mobile-filter-toggle { display: flex !important; }
+    #btn-desktop { display: flex !important; }
     #filters-body { display: none !important; }
     #filters-body.open { display: flex !important; }
 
@@ -152,6 +154,28 @@
     #changelog { display: none !important; }
     #changelog-panel { font-size: 10px; }
     .changelog-item { padding: 6px 10px; }
+  }
+
+  #btn-desktop {
+    display: none;
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2000;
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.3);
   }
 
   .equipe-body {
@@ -901,6 +925,13 @@ function setActive(id) {
 
 
 
+
+function forceDesktop() {
+  var meta = document.querySelector('meta[name="viewport"]');
+  if (meta) meta.content = 'width=1280';
+  document.getElementById('btn-desktop').style.display = 'none';
+}
+
 function toggleMobileFilters() {
   var body = document.getElementById('filters-body');
   var arrow = document.getElementById('mobile-filter-arrow');
@@ -1168,6 +1199,12 @@ document.addEventListener('keydown', e => {
     <span id="changelog-arrow" style="font-size:12px;transition:transform .2s">▼</span>
   </button>
 </div>
+
+
+<button id="btn-desktop" onclick="forceDesktop()">
+  <span class="material-symbols-outlined" style="font-size:15px">desktop_windows</span>
+  Ver versão PC
+</button>
 
 </body>
 </html>
