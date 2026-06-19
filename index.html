@@ -88,10 +88,56 @@
   #lightbox-next { right: 16px; }
 
   @media (max-width: 700px) {
+    /* Layout */
     .layout { flex-direction: column-reverse; }
-    .sidebar { width: 100%; height: 40dvh; border-right: none; border-top: 1px solid var(--border); }
-    #map { height: 60dvh; flex: none; }
+    #map { height: 55dvh; flex: none; }
     .header-stats { display: none; }
+
+    /* Sidebar compacta */
+    .sidebar {
+      width: 100%;
+      height: 45dvh;
+      border-right: none;
+      border-top: 1px solid var(--border);
+      overflow-y: auto;
+    }
+    .sidebar-header {
+      padding: 10px 12px 8px;
+    }
+
+    /* Esconde busca e filtros no mobile — deixa só os filtros essenciais */
+    #obra-search { font-size: 11px; padding: 6px 8px 6px 28px; }
+
+    /* Filtros em linha horizontal scrollável */
+    .filter-bar { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 2px; }
+    .filter-btn { font-size: 11px; padding: 3px 8px; white-space: nowrap; }
+
+    /* Itens da lista menores */
+    .obra-item { padding: 8px 12px; }
+    .obra-name { font-size: 13px; }
+    .obra-tags .tag { font-size: 10px; padding: 1px 6px; }
+
+    /* Popup menor e com scroll */
+    .custom-popup .leaflet-popup-content-wrapper {
+      max-width: 88vw !important;
+      max-height: 65vh;
+      overflow-y: auto;
+      border-radius: 8px;
+    }
+    .custom-popup .leaflet-popup-content {
+      margin: 0 !important;
+      width: auto !important;
+    }
+    .popup-head { padding: 10px 12px 8px; }
+    .popup-head h3 { font-size: 14px; }
+    .popup-body { padding: 8px 12px 10px; }
+    .popup-row { font-size: 11px; padding: 4px 0; }
+    .popup-section-title { font-size: 9px; }
+
+    /* Changelog menor */
+    #changelog { width: 200px; bottom: 24px; right: 6px; }
+    #changelog-panel { font-size: 10px; }
+    .changelog-item { padding: 6px 10px; }
   }
 
   .equipe-body {
@@ -134,6 +180,15 @@
     margin-bottom: 6px;
     overflow: hidden;
   }
+  #changelog-scroll {
+    max-height: 210px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #dde3ea transparent;
+  }
+  #changelog-scroll::-webkit-scrollbar { width: 4px; }
+  #changelog-scroll::-webkit-scrollbar-track { background: transparent; }
+  #changelog-scroll::-webkit-scrollbar-thumb { background: #dde3ea; border-radius: 4px; }
   #changelog-panel.open { display: block; }
   .changelog-head {
     background: var(--ink);
@@ -1036,6 +1091,7 @@ document.addEventListener('keydown', e => {
       <span class="material-symbols-outlined" style="font-size:14px;color:#e05c2a">history</span>
       <span>Log de Atualizações</span>
     </div>
+    <div id="changelog-scroll">
     <div class="changelog-item">
       <div class="changelog-date">18/06/2026</div>
       <div class="changelog-desc">Dados atualizados conforme R03 — Analista PCP preenchido, composição Barra Home corrigida (2x20+1x18), UH Total 4.158</div>
@@ -1055,6 +1111,7 @@ document.addEventListener('keydown', e => {
     <div class="changelog-item">
       <div class="changelog-date">13/06/2026</div>
       <div class="changelog-desc">Fotos adicionadas: MEO Anita, Porto Aurora, Vega Costa e Silva, Vega Jaraguá, Vega Neoville, Porto Garten</div>
+    </div>
     </div>
   </div>
   <button id="changelog-toggle" onclick="toggleChangelog()">
