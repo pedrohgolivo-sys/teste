@@ -308,7 +308,7 @@
     <div class="sidebar-header">
       <div style="position:relative;margin-bottom:10px">
         <span class="material-symbols-outlined" style="position:absolute;left:9px;top:50%;transform:translateY(-50%);font-size:16px;color:#8a9aaa;pointer-events:none">search</span>
-        <input id="obra-search" type="text" placeholder="Buscar por nome ou ID..."
+        <input id="obra-search" type="text" placeholder="Buscar por nome ou ID (separe por vírgula)..."
           style="width:100%;padding:7px 10px 7px 32px;border:1px solid #dde3ea;border-radius:6px;font-family:Inter,sans-serif;font-size:12px;color:#0f1923;outline:none;background:#f5f7fa;box-sizing:border-box"
           oninput="renderList()"
           onfocus="this.style.borderColor='#e05c2a';this.style.background='#fff'"
@@ -337,9 +337,9 @@
           <div style="font-size:10px;color:#8a9aaa;font-weight:600;text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Metodologia</div>
           <div class="filter-bar" data-group="metodologia">
             <button class="filter-btn active" data-filter="todos">Todas</button>
-            <button class="filter-btn" data-filter="Prédio em parede">Prédio concreto</button>
-            <button class="filter-btn" data-filter="Prédio em bloco">Prédio bloco</button>
-            <button class="filter-btn" data-filter="Casa em parede">Casa</button>
+            <button class="filter-btn" data-filter="Prédio em parede">Prédio parede concreto</button>
+            <button class="filter-btn" data-filter="Prédio em bloco">Prédio em bloco concreto</button>
+            <button class="filter-btn" data-filter="Casa em parede">Casa parede concreto</button>
           </div>
         </div>
         <div>
@@ -1020,6 +1020,13 @@ function toggleChangelog() {
 
 
 
+
+
+
+
+
+
+
 function toggleEquipe(header) {
   // header is now the inner clickable div, body is parent's next sibling
   var container = header.parentElement || header;
@@ -1120,7 +1127,8 @@ const activeFilters = { estado: ['todos'], metodologia: ['todos'], linha: ['todo
 function renderList() {
   const list = document.getElementById('obraList');
   list.innerHTML = '';
-  const searchVal = (document.getElementById('obra-search')?.value || '').toLowerCase().trim();
+  const rawSearch = (document.getElementById('obra-search')?.value || '').trim();
+  const searchTerms = rawSearch ? rawSearch.split(',').map(function(s){return s.trim().toLowerCase();}).filter(function(s){return s.length>0;}) : [];
   const filtradas = obras.filter(o => {
     const okEstado = activeFilters.estado.includes('todos') || activeFilters.estado.includes(o.estado);
     const okMet    = activeFilters.metodologia.includes('todos') || activeFilters.metodologia.some(f => o.metodologia.includes(f));
@@ -1135,9 +1143,8 @@ function renderList() {
       var maxMeses = Math.min.apply(null, activeFilters.prazo.filter(f => f !== 'todos').map(Number));
       return meses >= 0 && meses <= maxMeses;
     })();
-    const okSearch = !searchVal ||
-      o.nome.toLowerCase().includes(searchVal) ||
-      String(o.id).toLowerCase().includes(searchVal);
+    const okSearch = searchTerms.length === 0 ||
+      searchTerms.some(function(t){ return o.nome.toLowerCase().includes(t) || String(o.id).toLowerCase() === t; });
     return okEstado && okMet && okLinha && okPrazo && okSearch;
   });
 
@@ -1210,8 +1217,7 @@ function renderList() {
       setActive(o.id);
       map.flyTo([o.lat, o.lng], 14, { animate: true, duration: 1.5, easeLinearity: 0.25 });
       map.once('moveend', function() {
-        markers[o.id].openPopup();
-        map.panBy([0, -150], { animate: true, duration: 0.3 });
+        if (markers[o.id]) markers[o.id].openPopup();
       });
     });
     list.appendChild(item);
